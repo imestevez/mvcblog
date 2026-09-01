@@ -19,10 +19,10 @@ $view->setVariable("title", "Posts");
 	<?php foreach ($posts as $post): ?>
 		<tr>
 			<td>
-				<a href="index.php?controller=posts&amp;action=view&amp;id=<?= $post->getId() ?>"><?= htmlentities($post->getTitle()) ?></a>
+				<a href="index.php?controller=posts&amp;action=view&amp;id=<?= e($post->getId()) ?>"><?= e($post->getTitle()) ?></a>
 			</td>
 			<td>
-				<?= $post->getAuthor()->getUsername() ?>
+				<?= e($post->getAuthor()->getUsername()) ?>
 			</td>
 			<td>
 				<?php
@@ -38,11 +38,11 @@ $view->setVariable("title", "Posts");
 				<form
 				method="POST"
 				action="index.php?controller=posts&amp;action=delete"
-				id="delete_post_<?= $post->getId(); ?>"
+				id="delete_post_<?= e($post->getId()); ?>"
 				style="display: inline"
 				>
 
-				<input type="hidden" name="id" value="<?= $post->getId() ?>">
+				<input type="hidden" name="id" value="<?= e($post->getId()) ?>">
 
 				<a href="#" 
 				onclick="
@@ -58,7 +58,7 @@ $view->setVariable("title", "Posts");
 			<?php
 			// 'Edit Button'
 			?>
-			<a href="index.php?controller=posts&amp;action=edit&amp;id=<?= $post->getId() ?>"><?= i18n("Edit") ?></a>
+			<a href="index.php?controller=posts&amp;action=edit&amp;id=<?= e($post->getId()) ?>"><?= i18n("Edit") ?></a>
 
 		<?php endif; ?>
 

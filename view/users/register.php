@@ -10,7 +10,7 @@ $view->setVariable("title", "Register");
 <h1><?= i18n("Register")?></h1>
 <form action="index.php?controller=users&amp;action=register" method="POST">
 	<?= i18n("Username")?>: <input type="text" name="username"
-	value="<?= $user->getUsername() ?>">
+	value="<?= e($user->getUsername()) ?>">
 	<?= isset($errors["username"])?i18n($errors["username"]):"" ?><br>
 
 	<?= i18n("Password")?>: <input type="password" name="passwd"

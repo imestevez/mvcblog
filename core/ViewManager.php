@@ -1,6 +1,8 @@
 <?php
 // file: /core/ViewManager.php
 
+require_once(__DIR__."/ViewHelpers.php");
+
 /**
 * Class ViewManager
 *

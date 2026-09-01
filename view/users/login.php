@@ -8,7 +8,7 @@ $errors = $view->getVariable("errors");
 ?>
 
 <h1><?= i18n("Login") ?></h1>
-<?= isset($errors["general"])?$errors["general"]:"" ?>
+<?= e(isset($errors["general"])?$errors["general"]:"") ?>
 
 <form action="index.php?controller=users&amp;action=login" method="POST">
 	<?= i18n("Username")?>: <input type="text" name="username">

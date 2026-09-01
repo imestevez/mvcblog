@@ -12,17 +12,17 @@ $view->setVariable("title", "Edit Post");
 ?><h1><?= i18n("Modify post") ?></h1>
 <form action="index.php?controller=posts&amp;action=edit" method="POST">
 	<?= i18n("Title") ?>: <input type="text" name="title"
-	value="<?= isset($_POST["title"])?$_POST["title"]:$post->getTitle() ?>">
+	value="<?= e(isset($_POST["title"])?$_POST["title"]:$post->getTitle()) ?>">
 	<?= isset($errors["title"])?i18n($errors["title"]):"" ?><br>
 
 	<?= i18n("Contents") ?>: <br>
 	<textarea name="content" rows="4" cols="50"><?=
 	isset($_POST["content"])?
-	htmlentities($_POST["content"]):
-	htmlentities($post->getContent())
+	e($_POST["content"]):
+	e($post->getContent())
 	?></textarea>
 	<?= isset($errors["content"])?i18n($errors["content"]):"" ?><br>
 
-	<input type="hidden" name="id" value="<?= $post->getId() ?>">
+	<input type="hidden" name="id" value="<?= e($post->getId()) ?>">
 	<input type="submit" name="submit" value="<?= i18n("Modify post") ?>">
 </form>
