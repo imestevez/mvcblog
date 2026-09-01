@@ -48,42 +48,61 @@ The action-based (or push) MVC frameworks can be seen as in the following figure
 # Database creation script
 Connect to MySQL console and paste this script.
 ```sql
-create database mvcblog;
-use mvcblog;
-create table users (
-		username varchar(255),
-		passwd varchar(255),
-		primary key (username)
-) ENGINE=INNODB DEFAULT CHARACTER SET = utf8;
+-- Create database
+CREATE DATABASE IF NOT EXISTS mvcblog
+	CHARACTER SET utf8
+	COLLATE utf8_unicode_ci;
 
-create table posts (
+-- Create tables
+USE mvcblog;
+CREATE TABLE IF NOT EXISTS users (
+	username varchar(255) NOT NULL,
+	passwd varchar(255) NOT NULL,
+
+	primary key (username)
+) ENGINE=INNODB
+	DEFAULT CHARACTER SET = utf8
+	COLLATE = utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS posts (
 	id int auto_increment,
-	title varchar(255),
-	content varchar(255),
-	author varchar(255) not null,
+	title varchar(255) NOT NULL,
+	content varchar(255) NOT NULL,
+	author varchar(255) NOT NULL,
 
 	primary key (id),
 	foreign key (author) references users(username)
-) ENGINE=INNODB DEFAULT CHARACTER SET = utf8;
+) ENGINE=INNODB
+	DEFAULT CHARACTER SET = utf8
+	COLLATE = utf8_unicode_ci;
 
-create table comments (
-	id int auto_increment,	 
-	content varchar(255),
-	author varchar(255) not null,
-	post int not null,
+CREATE TABLE IF NOT EXISTS comments (
+	id int auto_increment,
+	content varchar(255) NOT NULL,
+	author varchar(255) NOT NULL,
+	post int NOT NULL,
 
 	primary key (id),
 	foreign key (author) references users(username),
 	foreign key (post) references posts(id) on delete cascade
-) ENGINE=INNODB DEFAULT CHARACTER SET = utf8;
+) ENGINE=INNODB
+	DEFAULT CHARACTER SET = utf8
+	COLLATE = utf8_unicode_ci;
 ```
+
 # Create username for the database
 Create a username for the database. The connection settings in the PHP code are
 in /core/PDOConnection.php
-
 ```sql
-CREATE USER 'mvcuser'@'localhost' IDENTIFIED BY 'mvcblogpass';
-GRANT ALL PRIVILEGES ON mvcblog.* TO 'mvcuser'@'localhost' WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS 'mvcuser'@'localhost' IDENTIFIED BY 'mvcblogpass';
+GRANT ALL PRIVILEGES ON mvcblog.* TO 'mvcuser'@'localhost';
+```
+
+# Insert data
+```sql
+INSERT INTO users (username, passwd) VALUES ('pepe', 'pepe');
+INSERT INTO users (username, passwd) VALUES ('ana', 'ana');
+INSERT INTO posts (title, content, author) VALUES ('My first post', 'Hi, this is the first post!', 'pepe');
 ```
 
 # TODO
