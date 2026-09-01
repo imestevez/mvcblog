@@ -14,6 +14,9 @@
 * @author lipido <lipido@gmail.com>
 */
 class URIDispatcher {
+	private $cors = false;
+	private $allowedOrigin = '';
+	private $allowedRequestHeaders = '';
 
 	// singleton
 	private static $uri_dispatcher_singleton = NULL;
@@ -24,9 +27,7 @@ class URIDispatcher {
 		return self::$uri_dispatcher_singleton;
 	}
 
-	public function __construct() {
-		$this->cors = false;
-	}
+	public function __construct() { }
 	/**
 	* Reference to an array of mapping specifications
 	*
