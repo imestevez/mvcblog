@@ -53,9 +53,11 @@ function run() {
 		// Call the corresponding action
 		$actionName = $_GET["action"];
 		$controller->$actionName();
-	} catch(Exception $ex) {
-		//uniform treatment of exceptions
-		die("An exception occured!!!!!".$ex->getMessage());
+	} catch(Throwable $ex) {
+		// Uniform treatment of exceptions and PHP runtime errors.
+		error_log($ex);
+		http_response_code(500);
+		die("An internal error occurred");
 	}
 }
 

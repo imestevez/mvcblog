@@ -22,6 +22,9 @@ class UserRest extends BaseRest {
 	}
 
 	public function postUser($data) {
+		if (!isset($data->username) || !isset($data->password)) {
+			throw new InvalidArgumentException("username and password are mandatory");
+		}
 		$user = new User($data->username, $data->password);
 		try {
 			$user->checkIsValidForRegister();

@@ -26,10 +26,15 @@ try{
 		die("no dispatcher found for this request");
 	}
 
-} catch(Throwable $ex) {
-	header($_SERVER['SERVER_PROTOCOL'].' 500 Internal server error');
+} catch(InvalidArgumentException $ex) {
+	header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
 	header("Content-Type: application/json");
 	die(json_encode(array("error" => $ex->getMessage())));
+} catch(Throwable $ex) {
+	error_log($ex);
+	header($_SERVER['SERVER_PROTOCOL'].' 500 Internal server error');
+	header("Content-Type: application/json");
+	die(json_encode(array("error" => "An internal error occurred")));
 }
 // debug
 //print_r($_SERVER);

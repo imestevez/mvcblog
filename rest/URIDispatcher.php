@@ -95,7 +95,16 @@ class URIDispatcher {
 					isset($_SERVER['CONTENT_TYPE']) &&
 					strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {
 
-						array_push($parameters, json_decode(file_get_contents("php://input")));
+						$body = file_get_contents("php://input");
+						try {
+							$data = json_decode($body, false, 512, JSON_THROW_ON_ERROR);
+						} catch (JsonException $ex) {
+							throw new InvalidArgumentException("Invalid JSON request body", 0, $ex);
+						}
+						if (!is_object($data)) {
+							throw new InvalidArgumentException("JSON request body must be an object");
+						}
+						array_push($parameters, $data);
 					}
 					
 					if ($this->cors == true) {

@@ -58,12 +58,12 @@ class PostRest extends BaseRest {
 		$currentUser = parent::authenticateUser();
 		$post = new Post();
 
-		if (isset($data->title) && isset($data->content)) {
-			$post->setTitle($data->title);
-			$post->setContent($data->content);
-
-			$post->setAuthor($currentUser);
+		if (!isset($data->title) || !isset($data->content)) {
+			throw new InvalidArgumentException("title and content are mandatory");
 		}
+		$post->setTitle($data->title);
+		$post->setContent($data->content);
+		$post->setAuthor($currentUser);
 
 		try {
 			// validate Post object
@@ -123,6 +123,9 @@ class PostRest extends BaseRest {
 
 	public function updatePost($postId, $data) {
 		$currentUser = parent::authenticateUser();
+		if (!isset($data->title) || !isset($data->content)) {
+			throw new InvalidArgumentException("title and content are mandatory");
+		}
 
 		$post = $this->postMapper->findById($postId);
 		if ($post == NULL) {
@@ -175,6 +178,9 @@ class PostRest extends BaseRest {
 
 	public function createComment($postId, $data) {
 		$currentUser = parent::authenticateUser();
+		if (!isset($data->content)) {
+			throw new InvalidArgumentException("content is mandatory");
+		}
 
 		$post = $this->postMapper->findById($postId);
 		if ($post == NULL) {
