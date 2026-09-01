@@ -85,7 +85,7 @@ class CommentsController extends BaseController {
 
 			// Create and populate the Comment object
 			$comment = new Comment();
-			$comment->setContent($_POST["content"]);
+			$comment->setContent($_POST["content"] ?? "");
 			$comment->setAuthor($this->currentUser);
 			$comment->setPost($post);
 

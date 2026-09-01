@@ -47,7 +47,7 @@ class Comment {
 	*/
 	public function __construct($id=NULL, $content=NULL, User $author=NULL, Post $post=NULL) {
 		$this->id = $id;
-		$this->content = $content;
+		$this->content = (string) ($content ?? "");
 		$this->author = $author;
 		$this->post = $post;
 	}
@@ -77,7 +77,7 @@ class Comment {
 	* @return void
 	*/
 	public function setContent($content) {
-		$this->content = $content;
+		$this->content = (string) ($content ?? "");
 	}
 
 	/**

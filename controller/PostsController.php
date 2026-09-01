@@ -143,8 +143,8 @@ class PostsController extends BaseController {
 		if (isset($_POST["submit"])) { // reaching via HTTP Post...
 
 			// populate the Post object with data form the form
-			$post->setTitle($_POST["title"]);
-			$post->setContent($_POST["content"]);
+			$post->setTitle($_POST["title"] ?? "");
+			$post->setContent($_POST["content"] ?? "");
 
 			// The user of the Post is the currentUser (user in session)
 			$post->setAuthor($this->currentUser);
@@ -242,8 +242,8 @@ class PostsController extends BaseController {
 		if (isset($_POST["submit"])) { // reaching via HTTP Post...
 
 			// populate the Post object with data form the form
-			$post->setTitle($_POST["title"]);
-			$post->setContent($_POST["content"]);
+			$post->setTitle($_POST["title"] ?? "");
+			$post->setContent($_POST["content"] ?? "");
 
 			try {
 				// validate Post object

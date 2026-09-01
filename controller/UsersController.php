@@ -66,7 +66,7 @@ class UsersController extends BaseController {
 	public function login() {
 		if (isset($_POST["username"])){ // reaching via HTTP Post...
 			//process login form
-			if ($this->userMapper->isValidUser($_POST["username"], 							 $_POST["passwd"])) {
+			if ($this->userMapper->isValidUser($_POST["username"], $_POST["passwd"] ?? "")) {
 
 				$_SESSION["currentuser"]=$_POST["username"];
 
@@ -119,7 +119,7 @@ class UsersController extends BaseController {
 
 			// populate the User object with data form the form
 			$user->setUsername($_POST["username"]);
-			$user->setPassword($_POST["passwd"]);
+				$user->setPassword($_POST["passwd"] ?? "");
 
 			try{
 				$user->checkIsValidForRegister(); // if it fails, ValidationException

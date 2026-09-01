@@ -31,8 +31,8 @@ class User {
 	* @param string $passwd The password of the user
 	*/
 	public function __construct($username=NULL, $passwd=NULL) {
-		$this->username = $username;
-		$this->passwd = $passwd;
+		$this->username = (string) ($username ?? "");
+		$this->passwd = (string) ($passwd ?? "");
 	}
 
 	/**
@@ -51,7 +51,7 @@ class User {
 	* @return void
 	*/
 	public function setUsername($username) {
-		$this->username = $username;
+		$this->username = (string) ($username ?? "");
 	}
 
 	/**
@@ -69,7 +69,7 @@ class User {
 	* @return void
 	*/
 	public function setPassword($passwd) {
-		$this->passwd = $passwd;
+		$this->passwd = (string) ($passwd ?? "");
 	}
 
 	/**

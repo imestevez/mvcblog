@@ -54,8 +54,8 @@ class Post {
 	*/
 	public function __construct($id=NULL, $title=NULL, $content=NULL, User $author=NULL, array $comments=NULL) {
 		$this->id = $id;
-		$this->title = $title;
-		$this->content = $content;
+		$this->title = (string) ($title ?? "");
+		$this->content = (string) ($content ?? "");
 		$this->author = $author;
 		$this->comments = $comments;
 
@@ -86,7 +86,7 @@ class Post {
 	* @return void
 	*/
 	public function setTitle($title) {
-		$this->title = $title;
+		$this->title = (string) ($title ?? "");
 	}
 
 	/**
@@ -105,7 +105,7 @@ class Post {
 	* @return void
 	*/
 	public function setContent($content) {
-		$this->content = $content;
+		$this->content = (string) ($content ?? "");
 	}
 
 	/**

@@ -92,6 +92,9 @@ class ViewManager {
 	*/
 	private function saveCurrentFragment() {
 		//save current fragment
+		if (!isset($this->fragmentContents[$this->currentFragment])) {
+			$this->fragmentContents[$this->currentFragment] = "";
+		}
 		$this->fragmentContents[$this->currentFragment].=ob_get_contents();
 		//clean output buffer
 		ob_clean();
