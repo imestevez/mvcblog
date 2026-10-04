@@ -18,5 +18,5 @@ $errors = $view->getVariable("errors");
 
 <p><?= i18n("Not user?")?> <a href="index.php?controller=users&amp;action=register"><?= i18n("Register here!")?></a></p>
 <?php $view->moveToFragment("css");?>
-<link rel="stylesheet" type="text/css" src="css/style2.css">
+<link rel="stylesheet" href="css/style2.css" type="text/css">
 <?php $view->moveToDefaultFragment(); ?>
